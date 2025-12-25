@@ -4,7 +4,7 @@
  * Run an MCP knowledge base as an HTTP server
  */
 
-import { KnowledgeBase } from '@akyn/mcp-kb'
+import { KnowledgeBase } from 'akyn-ai'
 
 async function main() {
   // Create a knowledge base

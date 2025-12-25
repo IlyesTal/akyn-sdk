@@ -4,7 +4,7 @@
  * Use your own embeddings provider (e.g., local model, different API)
  */
 
-import { KnowledgeBase, type EmbeddingsProvider, type EmbeddingResult } from '@akyn/mcp-kb'
+import { KnowledgeBase, type EmbeddingsProvider, type EmbeddingResult } from 'akyn-ai'
 
 /**
  * Example: Custom embeddings provider using a local model or different API

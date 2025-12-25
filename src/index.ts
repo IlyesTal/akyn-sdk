@@ -1,11 +1,11 @@
 /**
- * @akyn/mcp-kb
+ * akyn-ai
  * 
  * Turn any data source into an MCP server in minutes.
  * 
  * @example
  * ```typescript
- * import { KnowledgeBase } from '@akyn/mcp-kb';
+ * import { KnowledgeBase } from 'akyn-ai';
  * 
  * const kb = new KnowledgeBase({
  *   name: 'my-docs',

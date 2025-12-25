@@ -4,7 +4,7 @@
  * Index a directory and serve as MCP server for Cursor/Claude Desktop
  */
 
-import { KnowledgeBase } from '@akyn/mcp-kb'
+import { KnowledgeBase } from 'akyn-ai'
 
 async function main() {
   // Create a knowledge base

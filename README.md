@@ -1,10 +1,10 @@
-# @akyn/mcp-kb
+# akyn-ai
 
 **Turn any data source into an MCP server in 5 minutes.**
 
 Build knowledge bases that AI assistants like Claude and Cursor can query directly. No infrastructure needed.
 
-[![npm version](https://img.shields.io/npm/v/@akyn/mcp-kb)](https://www.npmjs.com/package/@akyn/mcp-kb)
+[![npm version](https://img.shields.io/npm/v/akyn-ai)](https://www.npmjs.com/package/akyn-ai)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
@@ -26,13 +26,13 @@ This SDK lets you create [MCP (Model Context Protocol)](https://modelcontextprot
 ### Install
 
 ```bash
-npm install @akyn/mcp-kb
+npm install akyn-ai
 ```
 
 ### Basic Usage
 
 ```typescript
-import { KnowledgeBase } from '@akyn/mcp-kb'
+import { KnowledgeBase } from 'akyn-ai'
 
 // Create a knowledge base
 const kb = new KnowledgeBase({
@@ -133,13 +133,13 @@ const kb = new KnowledgeBase({
 Uses OpenAI by default, but you can bring your own:
 
 ```typescript
-import { KnowledgeBase, type EmbeddingsProvider } from '@akyn/mcp-kb'
+import { KnowledgeBase, type EmbeddingsProvider } from 'akyn-ai'
 
 // Use OpenAI (default)
 const kb = new KnowledgeBase({ name: 'my-kb' })
 
 // Or customize OpenAI settings
-import { OpenAIEmbeddings } from '@akyn/mcp-kb'
+import { OpenAIEmbeddings } from 'akyn-ai'
 
 const kb = new KnowledgeBase({
   name: 'my-kb',
@@ -174,7 +174,7 @@ const kb = new KnowledgeBase({
 In-memory by default, but you can use your own:
 
 ```typescript
-import { InMemoryVectorStore } from '@akyn/mcp-kb'
+import { InMemoryVectorStore } from 'akyn-ai'
 
 // In-memory with persistence
 const kb = new KnowledgeBase({
@@ -208,13 +208,13 @@ You can also use the CLI without writing code:
 
 ```bash
 # Index a directory
-npx @akyn/mcp-kb --dir ./docs --name "My Docs"
+npx akyn-ai --dir ./docs --name "My Docs"
 
 # Use a config file
-npx @akyn/mcp-kb --config ./kb-config.json
+npx akyn-ai --config ./kb-config.json
 
 # Run as HTTP server
-npx @akyn/mcp-kb --dir ./docs --http 3000
+npx akyn-ai --dir ./docs --http 3000
 ```
 
 ### Config File Format
@@ -287,7 +287,7 @@ import {
   
   // Vector store
   InMemoryVectorStore,
-} from '@akyn/mcp-kb'
+} from 'akyn-ai'
 ```
 
 ---

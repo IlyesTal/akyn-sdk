@@ -253,24 +253,22 @@ const kb = new KnowledgeBase({
 
 ### Retrieval Options
 
-Configure how results are retrieved from the knowledge base:
+Control how many results are returned and their minimum quality. These options are configured in your code (not exposed to AI agents), giving you full control over retrieval behavior.
 
 ```typescript
 const kb = new KnowledgeBase({
   name: 'my-kb',
   retrieval: {
-    topK: 5,        // Number of chunks to retrieve (default: 5)
-    threshold: 0,   // Minimum similarity score 0-1 (default: 0)
+    topK: 10,         // Return up to 10 chunks per query
+    threshold: 0.5,   // Only return chunks with similarity score >= 0.5
   },
 })
 ```
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `topK` | number | 5 | Maximum number of chunks to retrieve |
-| `threshold` | number | 0 | Minimum similarity score (0-1). Results below this are filtered out |
-
-> **Note:** These options are configured in code, not exposed to AI agents via MCP. This gives you full control over retrieval behavior.
+| `topK` | number | 5 | Maximum number of chunks to retrieve per query |
+| `threshold` | number | 0 | Minimum similarity score (0-1). Set to `0` to return all results, or higher (e.g. `0.5`, `0.7`) to filter out less relevant chunks |
 
 #### Methods
 

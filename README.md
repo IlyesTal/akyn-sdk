@@ -305,10 +305,17 @@ Search the knowledge base with a natural language question.
   "name": "query",
   "arguments": {
     "question": "How do I authenticate?",
-    "max_results": 5
+    "max_results": 5,
+    "threshold": 0.7
   }
 }
 ```
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `question` | string | (required) | The question to search for |
+| `max_results` | number | 5 | Maximum number of results to return |
+| `threshold` | number | 0.7 | Minimum similarity score (0-1) |
 
 ### `list_sources`
 

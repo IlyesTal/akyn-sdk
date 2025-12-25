@@ -1,0 +1,67 @@
+{
+  "name": "@akyn/mcp-kb",
+  "version": "0.1.0",
+  "description": "Turn any data source into an MCP server in minutes",
+  "author": "Akyn AI",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "akyn-mcp": "./bin/akyn-mcp.js"
+  },
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "mammoth": "^1.11.0",
+    "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "tsup": "^8.0.0",
+    "typescript": "^5"
+  },
+  "peerDependencies": {
+    "openai": "^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "openai": {
+      "optional": true
+    }
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "knowledge-base",
+    "rag",
+    "embeddings",
+    "vector-search",
+    "claude",
+    "cursor",
+    "ai"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akyn-ai/mcp-kb"
+  },
+  "homepage": "https://akyn.ai",
+  "engines": {
+    "node": ">=18"
+  }
+}
+

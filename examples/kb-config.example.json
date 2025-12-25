@@ -1,0 +1,31 @@
+{
+  "name": "My Knowledge Base",
+  "description": "Documentation and guides for my project",
+  "sources": [
+    {
+      "type": "directory",
+      "path": "./docs",
+      "options": {
+        "recursive": true,
+        "extensions": [".md", ".txt"]
+      }
+    },
+    {
+      "type": "file",
+      "path": "./README.md"
+    },
+    {
+      "type": "file",
+      "path": "./CHANGELOG.md"
+    },
+    {
+      "type": "url",
+      "url": "https://docs.example.com/getting-started"
+    }
+  ],
+  "chunking": {
+    "maxSize": 1000,
+    "overlap": 200
+  }
+}
+

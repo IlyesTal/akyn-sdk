@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "my-docs": {
+      "command": "npx",
+      "args": ["ts-node", "/path/to/your/kb-server.ts"],
+      "env": {
+        "OPENAI_API_KEY": "sk-..."
+      }
+    },
+    "project-docs": {
+      "command": "npx",
+      "args": ["akyn-mcp", "--dir", "./docs", "--name", "Project Docs"],
+      "env": {
+        "OPENAI_API_KEY": "sk-..."
+      }
+    },
+    "from-config": {
+      "command": "npx",
+      "args": ["akyn-mcp", "--config", "./kb-config.json"],
+      "env": {
+        "OPENAI_API_KEY": "sk-..."
+      }
+    }
+  }
+}
+

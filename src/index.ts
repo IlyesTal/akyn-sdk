@@ -119,10 +119,12 @@ export {
 // Export vector store
 export {
   InMemoryVectorStore,
+  QdrantVectorStore,
   type VectorStore,
   type StoredDocument,
   type SearchResult,
   type InMemoryVectorStoreConfig,
+  type QdrantVectorStoreConfig,
 } from './vectorstore'
 
 // Export server utilities

@@ -169,24 +169,82 @@ const kb = new KnowledgeBase({
 })
 ```
 
-### 💾 Pluggable Vector Stores
+### 💾 Vector Stores
 
-In-memory by default, but you can use your own:
+#### In-Memory (Default)
+
+Perfect for development and small datasets:
 
 ```typescript
 import { InMemoryVectorStore } from 'akyn-ai'
 
-// In-memory with persistence
 const kb = new KnowledgeBase({
   name: 'my-kb',
   vectorStore: new InMemoryVectorStore({
-    persistPath: './kb-data.json',  // Save to disk
+    persistPath: './kb-data.json',  // Optional: save to disk
   }),
 })
+```
 
-// Or implement your own (Qdrant, Pinecone, etc.)
-class QdrantVectorStore implements VectorStore {
-  // ... implement the interface
+#### Qdrant
+
+For production workloads, use [Qdrant](https://qdrant.tech/) - a high-performance vector database:
+
+```typescript
+import { KnowledgeBase, QdrantVectorStore } from 'akyn-ai'
+
+const kb = new KnowledgeBase({
+  name: 'my-kb',
+  vectorStore: new QdrantVectorStore(),  // That's it!
+})
+```
+
+**Local Setup (Docker)**
+
+```bash
+# Start Qdrant with one command
+docker run -p 6333:6333 qdrant/qdrant
+
+# With persistent storage
+docker run -p 6333:6333 -v ./qdrant_data:/qdrant/storage qdrant/qdrant
+```
+
+**Qdrant Cloud**
+
+For managed hosting, use [Qdrant Cloud](https://cloud.qdrant.io/):
+
+```typescript
+const kb = new KnowledgeBase({
+  name: 'my-kb',
+  vectorStore: new QdrantVectorStore({
+    url: 'https://your-cluster.cloud.qdrant.io',
+    apiKey: process.env.QDRANT_API_KEY,
+    collection: 'my-docs',  // Optional: defaults to 'akyn_documents'
+  }),
+})
+```
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `url` | string | `http://localhost:6333` | Qdrant server URL |
+| `apiKey` | string | - | API key (required for Qdrant Cloud) |
+| `collection` | string | `akyn_documents` | Collection name |
+| `dimensions` | number | auto-detected | Vector dimensions |
+
+#### Custom Vector Store
+
+Implement the `VectorStore` interface for other databases (Pinecone, Weaviate, etc.):
+
+```typescript
+import type { VectorStore } from 'akyn-ai'
+
+class MyVectorStore implements VectorStore {
+  async add(document) { /* ... */ }
+  async addBatch(documents) { /* ... */ }
+  async search(embedding, options) { /* ... */ }
+  async delete(id) { /* ... */ }
+  async clear() { /* ... */ }
+  async count() { /* ... */ }
 }
 ```
 
@@ -305,8 +363,9 @@ import {
   OpenAIEmbeddings,
   cosineSimilarity,
   
-  // Vector store
+  // Vector stores
   InMemoryVectorStore,
+  QdrantVectorStore,
 } from 'akyn-ai'
 ```
 
@@ -355,6 +414,7 @@ See the [examples](./examples) directory for more:
 - [Basic usage](./examples/basic)
 - [HTTP server](./examples/http-server)
 - [Custom embeddings](./examples/with-custom-embeddings)
+- [Qdrant vector store](./examples/with-qdrant)
 
 ---
 

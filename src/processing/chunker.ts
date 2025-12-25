@@ -46,7 +46,7 @@ export interface Chunk {
  */
 export function chunkText(text: string, options: ChunkOptions = {}): Chunk[] {
   const {
-    maxSize = 1000,
+    maxSize = 500,
     overlap = 200,
     separator = '\n\n',
   } = options

@@ -10,7 +10,7 @@ const OPENAI_API_URL = 'https://api.openai.com/v1/embeddings'
 export interface OpenAIEmbeddingsConfig extends EmbeddingsConfig {
   /**
    * OpenAI model to use
-   * @default 'text-embedding-3-small'
+   * @default 'text-embedding-3-large'
    */
   model?: 'text-embedding-3-small' | 'text-embedding-3-large' | 'text-embedding-ada-002' | string
 }
@@ -31,10 +31,10 @@ export class OpenAIEmbeddings implements EmbeddingsProvider {
 
   constructor(config: OpenAIEmbeddingsConfig = {}) {
     this.apiKey = config.apiKey || process.env.OPENAI_API_KEY || ''
-    this.model = config.model || 'text-embedding-3-small'
+    this.model = config.model || 'text-embedding-3-large'
     this.baseURL = config.baseURL || OPENAI_API_URL
     this.batchSize = config.batchSize || 100
-    this.dimensions = MODEL_DIMENSIONS[this.model] || 1536
+    this.dimensions = MODEL_DIMENSIONS[this.model] || 3072
 
     if (!this.apiKey) {
       throw new Error(

@@ -1,6 +1,6 @@
 {
   "name": "akyn-ai",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Turn any data source into an MCP server in minutes",
   "author": "Akyn AI",
   "license": "MIT",
@@ -64,4 +64,3 @@
     "node": ">=18"
   }
 }
-

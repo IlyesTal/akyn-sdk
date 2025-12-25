@@ -125,14 +125,6 @@ export class MCPHandler {
                 type: 'string',
                 description: 'The question to search for in the knowledge base',
               },
-              max_results: {
-                type: 'number',
-                description: 'Maximum number of results to return (default: 5)',
-              },
-              threshold: {
-                type: 'number',
-                description: 'Minimum similarity score threshold (0-1, default: 0.7)',
-              },
             },
             required: ['question'],
           },
@@ -178,8 +170,6 @@ export class MCPHandler {
    */
   private async executeQuery(args: Record<string, unknown>): Promise<MCPToolResult> {
     const question = args.question as string
-    const maxResults = (args.max_results as number) || 5
-    const threshold = (args.threshold as number) ?? 0.7
 
     if (!question) {
       return {
@@ -189,7 +179,7 @@ export class MCPHandler {
     }
 
     try {
-      const results = await this.kb.query(question, { topK: maxResults, threshold })
+      const results = await this.kb.query(question)
 
       if (results.length === 0) {
         return {

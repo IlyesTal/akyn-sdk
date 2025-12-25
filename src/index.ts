@@ -28,6 +28,7 @@ import {
   type KnowledgeBaseConfig,
   type Source,
   type QueryResult,
+  type RetrievalOptions,
 } from './knowledge-base'
 
 import { serveStdio, type StdioServerOptions } from './server/stdio'
@@ -71,7 +72,7 @@ export class KnowledgeBase extends KnowledgeBaseCore {
 }
 
 // Export types
-export type { KnowledgeBaseConfig, Source, QueryResult }
+export type { KnowledgeBaseConfig, Source, QueryResult, RetrievalOptions }
 export type { StdioServerOptions } from './server/stdio'
 export type { HttpServerOptions } from './server/http'
 

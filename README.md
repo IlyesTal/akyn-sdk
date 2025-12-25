@@ -247,8 +247,30 @@ const kb = new KnowledgeBase({
   embeddings?: EmbeddingsProvider,  // Optional: Custom embeddings
   vectorStore?: VectorStore,        // Optional: Custom vector store
   chunking?: ChunkOptions,          // Optional: Chunking settings
+  retrieval?: RetrievalOptions,     // Optional: Retrieval settings
 })
 ```
+
+### Retrieval Options
+
+Configure how results are retrieved from the knowledge base:
+
+```typescript
+const kb = new KnowledgeBase({
+  name: 'my-kb',
+  retrieval: {
+    topK: 5,        // Number of chunks to retrieve (default: 5)
+    threshold: 0,   // Minimum similarity score 0-1 (default: 0)
+  },
+})
+```
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `topK` | number | 5 | Maximum number of chunks to retrieve |
+| `threshold` | number | 0 | Minimum similarity score (0-1). Results below this are filtered out |
+
+> **Note:** These options are configured in code, not exposed to AI agents via MCP. This gives you full control over retrieval behavior.
 
 #### Methods
 
@@ -304,18 +326,16 @@ Search the knowledge base with a natural language question.
 {
   "name": "query",
   "arguments": {
-    "question": "How do I authenticate?",
-    "max_results": 5,
-    "threshold": 0.7
+    "question": "How do I authenticate?"
   }
 }
 ```
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `question` | string | (required) | The question to search for |
-| `max_results` | number | 5 | Maximum number of results to return |
-| `threshold` | number | 0.7 | Minimum similarity score (0-1) |
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `question` | string | The question to search for |
+
+> **Note:** The number of results and similarity threshold are configured via the `retrieval` option when creating the KnowledgeBase. See [Retrieval Options](#retrieval-options).
 
 ### `list_sources`
 

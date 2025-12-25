@@ -12,6 +12,21 @@ import { loadFile, loadDirectory, loadURL } from './loaders'
 import { OpenAIEmbeddings, type EmbeddingsProvider } from './embeddings'
 import { InMemoryVectorStore, type VectorStore, type SearchResult } from './vectorstore'
 
+export interface RetrievalOptions {
+  /**
+   * Maximum number of chunks to retrieve
+   * @default 5
+   */
+  topK?: number
+  
+  /**
+   * Minimum similarity score threshold (0-1)
+   * Results below this threshold are filtered out
+   * @default 0
+   */
+  threshold?: number
+}
+
 export interface KnowledgeBaseConfig {
   /**
    * Name of the knowledge base
@@ -46,6 +61,12 @@ export interface KnowledgeBaseConfig {
    * Chunking options for text processing
    */
   chunking?: ChunkOptions
+  
+  /**
+   * Retrieval options for querying
+   * Configure how many results to return and similarity threshold
+   */
+  retrieval?: RetrievalOptions
 }
 
 export interface Source {
@@ -83,6 +104,7 @@ export class KnowledgeBase {
   private vectorStore: VectorStore
   private sources: Map<string, Source> = new Map()
   private chunkOptions: ChunkOptions
+  private retrievalOptions: Required<RetrievalOptions>
 
   constructor(config: KnowledgeBaseConfig) {
     if (!config.name) {
@@ -97,6 +119,10 @@ export class KnowledgeBase {
     this.embeddings = config.embeddings || new OpenAIEmbeddings()
     this.vectorStore = config.vectorStore || new InMemoryVectorStore()
     this.chunkOptions = config.chunking || {}
+    this.retrievalOptions = {
+      topK: config.retrieval?.topK ?? 5,
+      threshold: config.retrieval?.threshold ?? 0,
+    }
   }
 
   /**
@@ -247,7 +273,8 @@ export class KnowledgeBase {
     question: string,
     options?: { topK?: number; threshold?: number }
   ): Promise<QueryResult[]> {
-    const { topK = 5, threshold = 0.7 } = options || {}
+    const topK = options?.topK ?? this.retrievalOptions.topK
+    const threshold = options?.threshold ?? this.retrievalOptions.threshold
 
     // Generate embedding for the question
     const { embedding } = await this.embeddings.embed(question)

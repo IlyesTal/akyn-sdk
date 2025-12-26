@@ -9,8 +9,6 @@ import * as http from 'http'
 import type { KnowledgeBase } from '../knowledge-base'
 import { MCPHandler } from './mcp-handler'
 import type { JsonRpcRequest, JsonRpcResponse } from './types'
-import type { AuthConfig } from './auth'
-import { resolveAuthHandler } from './auth'
 
 export interface HttpServerOptions {
   /**
@@ -42,21 +40,6 @@ export interface HttpServerOptions {
    * @default false
    */
   debug?: boolean
-
-  /**
-   * Authentication configuration
-   * 
-   * @example Bearer token
-   * ```ts
-   * auth: { type: 'bearer', token: process.env.API_KEY }
-   * ```
-   * 
-   * @example OAuth introspection
-   * ```ts
-   * auth: { type: 'oauth', introspectionUrl: 'https://auth.example.com/introspect' }
-   * ```
-   */
-  auth?: AuthConfig
 }
 
 const CORS_HEADERS = {
@@ -77,11 +60,9 @@ export function createHttpServer(
     cors = true,
     corsOrigin = '*',
     debug = false,
-    auth,
   } = options
 
   const handler = new MCPHandler(knowledgeBase)
-  const authHandler = auth ? resolveAuthHandler(auth) : undefined
 
   const log = (msg: string) => {
     if (debug) {
@@ -105,21 +86,6 @@ export function createHttpServer(
       res.writeHead(204, corsHeaders)
       res.end()
       return
-    }
-
-    // Check authentication
-    if (authHandler) {
-      const authResult = await authHandler(req)
-      if (!authResult.authenticated) {
-        log(`Auth failed: ${authResult.error}`)
-        res.writeHead(401, {
-          'Content-Type': 'application/json',
-          'WWW-Authenticate': 'Bearer',
-          ...corsHeaders,
-        })
-        res.end(JSON.stringify({ error: 'Unauthorized', message: authResult.error }))
-        return
-      }
     }
 
     // Handle SSE connection (for MCP transport)

@@ -258,62 +258,6 @@ kb.serveStdio()
 await kb.serveHttp({ port: 3000 })
 ```
 
-### 🔐 Authentication
-
-Protect your HTTP server with bearer tokens or OAuth:
-
-#### Bearer Token
-
-```typescript
-await kb.serveHttp({
-  port: 3000,
-  auth: {
-    type: 'bearer',
-    token: process.env.API_KEY,
-  },
-})
-```
-
-You can also allow multiple tokens:
-
-```typescript
-await kb.serveHttp({
-  auth: {
-    type: 'bearer',
-    token: ['key-1', 'key-2', 'key-3'],
-  },
-})
-```
-
-#### OAuth (Token Introspection)
-
-```typescript
-await kb.serveHttp({
-  auth: {
-    type: 'oauth',
-    introspectionUrl: 'https://auth.example.com/oauth2/introspect',
-    clientId: process.env.OAUTH_CLIENT_ID,
-    clientSecret: process.env.OAUTH_CLIENT_SECRET,
-  },
-})
-```
-
-#### Custom Auth Handler
-
-For full control, provide your own auth function:
-
-```typescript
-await kb.serveHttp({
-  auth: async (req) => {
-    const token = req.headers['x-api-key'] as string
-    const valid = await validateToken(token)
-    return { authenticated: valid }
-  },
-})
-```
-
-Unauthenticated requests receive a `401 Unauthorized` response.
-
 ---
 
 ## CLI Usage
@@ -407,17 +351,8 @@ await kb.serveHttp({
   cors: true,           // Enable CORS (default: true)
   corsOrigin: '*',      // CORS origin (default: '*')
   debug: false,         // Enable debug logging (default: false)
-  auth: AuthConfig,     // Authentication config (optional)
 })
 ```
-
-### Auth Config
-
-| Type | Options |
-|------|---------|
-| Bearer | `{ type: 'bearer', token: string \| string[] }` |
-| OAuth | `{ type: 'oauth', introspectionUrl: string, clientId?: string, clientSecret?: string }` |
-| Custom | `(req: IncomingMessage) => Promise<AuthResult> \| AuthResult` |
 
 ### Utilities
 
@@ -490,7 +425,6 @@ See the [examples](./examples) directory for more:
 
 - [Basic usage](./examples/basic)
 - [HTTP server](./examples/http-server)
-- [HTTP server with auth](./examples/with-auth)
 - [Custom embeddings](./examples/with-custom-embeddings)
 - [Qdrant vector store](./examples/with-qdrant)
 

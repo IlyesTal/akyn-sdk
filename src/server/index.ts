@@ -12,5 +12,4 @@ export type {
   MCPInitializeResult,
   MCPToolResult,
 } from './types'
-export type { AuthConfig, AuthResult, AuthHandler, BearerAuthConfig, OAuthConfig } from './auth'
 

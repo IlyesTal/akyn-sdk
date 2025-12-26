@@ -137,10 +137,5 @@ export {
   type JsonRpcResponse,
   type MCPTool,
   type MCPResource,
-  type AuthConfig,
-  type AuthResult,
-  type AuthHandler,
-  type BearerAuthConfig,
-  type OAuthConfig,
 } from './server'
 

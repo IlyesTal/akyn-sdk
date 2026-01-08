@@ -138,7 +138,7 @@ Config file format:
     ]
   }
 
-For more info, visit: https://github.com/akyn-ai/mcp-kb
+For more info, visit: https://github.com/IlyesTal/akyn-sdk
 `)
 }
 

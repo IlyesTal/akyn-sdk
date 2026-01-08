@@ -59,7 +59,7 @@
     "type": "git",
     "url": "https://github.com/akyn-ai/mcp-kb"
   },
-  "homepage": "https://akyn.ai",
+  "homepage": "https://akyn.dev",
   "engines": {
     "node": ">=18"
   }

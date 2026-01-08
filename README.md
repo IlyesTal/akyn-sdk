@@ -439,7 +439,7 @@ See the [examples](./examples) directory for more:
 
 ## Want Managed Hosting?
 
-Building something bigger? Check out [Akyn](https://akyn.ai) for:
+Building something bigger? Check out [Akyn](https://akyn.dev) for:
 
 - ☁️ Hosted knowledge bases
 - 👥 Team collaboration
@@ -457,5 +457,5 @@ Contributions welcome! Please read our contributing guidelines first.
 
 ## License
 
-MIT © [Akyn AI](https://akyn.ai)
+MIT © [Akyn AI](https://akyn.dev)
 
